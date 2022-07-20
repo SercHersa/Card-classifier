@@ -34,7 +34,7 @@ motorControl motor(sampleTime);
 
 //--------------setup------------
 void setup() {
-  motor.setCvLimits(4095,1800);
+  motor.setCvLimits(4095,2000);
   motor.setPvLimits(19,0);
   
   pinMode(EnMR, OUTPUT);
@@ -67,8 +67,11 @@ void loop() {
     if (cv > 0){
       clockwise (cv);
     }
-    else{
+    else if (cv < 0){
       anticlockwise(abs(cv));
+    }
+    else{
+      anticlockwise (0);
     }
     inputString = ""; 
     stringComplete = false; 
@@ -118,10 +121,18 @@ void clockwise(int vel){
   digitalWrite(MR_A, LOW);
   digitalWrite(MR_B, HIGH);
   ledcWrite(canal_R, vel);
+  if (vel == 0) {
+    digitalWrite(MR_A, LOW);
+    digitalWrite(MR_B, LOW);
+  }
 }
 
 void anticlockwise(int vel){
   digitalWrite(MR_A, HIGH);
   digitalWrite(MR_B, LOW);
   ledcWrite(canal_R, vel);
+  if (vel == 0) {
+    digitalWrite(MR_A, LOW);
+    digitalWrite(MR_B, LOW);
+  }
 }
