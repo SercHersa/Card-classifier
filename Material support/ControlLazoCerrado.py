@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 #import numpy as np
 
 ts = 0.1 # Tiempo de muestreo
-tf = 10 # Tiempo de simulacion
+tf = 20 # Tiempo de simulacion
 t = np.arange(0,tf+ts,ts) # Array de tiempo
 N = len(t) # Numero de muestras
 
