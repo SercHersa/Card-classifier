@@ -1,9 +1,3 @@
-/*
-PUERTA AUTOMATICA CON RFID
-by: http://elprofegarcia.com/
-
-*/
-
 #include <SPI.h>          //  Libreria SPI
 #include <MFRC522.h>      // Libreria  MFRC522
 #include <Servo.h>        // Libreria  SERVO
@@ -42,9 +36,8 @@ void setup() {
     digitalWrite(codigo[i],LOW);
   }
 
-  pinMode(robotAlert, OUTPUT);
-  digitalWrite(robotAlert,LOW);
-  
+  pinMode(robotAlert, INPUT);
+    
   Serial.begin(9600);                       // inicializa comunicacion por monitor serie a 9600 bps
   SPI.begin();                              // inicializa bus SPI
   mfrc522.PCD_Init();                       // inicializa modulo lector
