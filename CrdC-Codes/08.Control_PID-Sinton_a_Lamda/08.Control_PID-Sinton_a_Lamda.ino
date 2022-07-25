@@ -51,16 +51,17 @@ void setup() {
 
   Serial.begin(115200);
 
-  motor.lambdaTunning(1.1408,0.1032,0.0896);   // const de porporcionalidad, const de tiempo en lazo abierto,retardo
+  //motor.lambdaTunning(1.1408,0.1032,0.0896);   // const de porporcionalidad, const de tiempo en lazo abierto,retardo
+  motor.setGains(0.6, 0.08, 0.03);
   
   motor.setCvLimits(4095,1900);               // valores límites de pwm, para vel máxima y minima
   motor.setPvLimits(19,0);                    // valores límites en rad/s
   
-  Serial.print(motor.getK());
-  Serial.print(", ");
-  Serial.print(motor.getTi());
-  Serial.print(", ");
-  Serial.println(motor.getTd());
+//  Serial.print(motor.getK());
+//  Serial.print(", ");
+//  Serial.print(motor.getTi());
+//  Serial.print(", ");
+// Serial.println(motor.getTd());
   
 }
 
@@ -70,7 +71,7 @@ void loop() {
   if (stringComplete) {
     for (int i = 0; i < datoLength; i++){
       int index = inputString.indexOf(separator);
-      dato[i] = inputString.substring(0,index).toInt();
+      dato[i] = inputString.substring(0,index).toFloat();
       inputString = inputString.substring(index+1);
     }
     wRef = dato[0];
@@ -116,7 +117,7 @@ void velValue(){
     }
     
     Serial.println(w);
-    //Serial.println(cv);
+    Serial.println(cv);
   }
 }
 
