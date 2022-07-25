@@ -1,3 +1,8 @@
 kp = 1.1408
 tau = 0.1032
 delay = 0.0896
+
+Datos recibido cuando se hace sintonia con Lamda
+0.37, 0.15, 0.03
+
+SintonizacionLambdaFloat

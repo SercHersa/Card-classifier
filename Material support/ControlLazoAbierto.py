@@ -9,7 +9,7 @@ N = len(t) # Numero de muestras
 ######################## Comunicacion Serial ###############
 
 port = 'COM10'  # Com Arduino
-baudRate = 115200 # Baudios
+baudRate = 115200 # Velocidad de transmisión en Baudios de la ESP32
 
 arduino = serialArduino(port,baudRate)# Objeto serial
 
@@ -17,14 +17,14 @@ arduino.readSerialStart() # Inicia lectura de datos
 
 ######################### Señales #####################
 
-pv  = np.zeros(N) # Variable de proceso (Pv)
+pv  = np.zeros(N) # Variable de proceso (Pv) - Donde se almacenará la lectura de la velocidad en rad/s
 cv  = np.zeros(N) # Variable de control (Cv)
 
 ########################## Loop ########################
 
 for k in range(N):
 
-     start_time = time.time() # Tiempo actual
+     start_time = time.time() # Tiempo actual en ese instante
 
      # Escalon 
      if k*ts   > 3:  # Escalon a los 3 segundos
@@ -32,9 +32,9 @@ for k in range(N):
      else:
           cv[k] = 0;
      
-     arduino.sendData([cv[k]]) # Enviar Cv (debe ser una lista)
+     arduino.sendData([cv[k]]) # Enviar Cv (debe ser una lista), si se necesita enviar otro dato, en el parametro se agraga una coma
      
-     pv[k] = arduino.rawData[0] # Recibir Pv 
+     pv[k] = arduino.rawData[0] # Recibir Pv en porcentaje
           
      elapsed_time = time.time() - start_time # Tiempo transcurrido
      
