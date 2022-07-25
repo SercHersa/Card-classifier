@@ -52,7 +52,7 @@ void setup() {
   Serial.begin(115200);
 
   //motor.lambdaTunning(1.1408,0.1032,0.0896);   // const de porporcionalidad, const de tiempo en lazo abierto,retardo
-  motor.setGains(0.6, 0.08, 0.03);
+  motor.setGains(0.5, 0.04, 0.04);
   
   motor.setCvLimits(4095,1900);               // valores límites de pwm, para vel máxima y minima
   motor.setPvLimits(19,0);                    // valores límites en rad/s
