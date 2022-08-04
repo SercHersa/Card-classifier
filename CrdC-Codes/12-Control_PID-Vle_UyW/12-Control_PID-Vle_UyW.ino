@@ -174,7 +174,8 @@ void velValue(){
     Serial.println(wRobot);
     //Serial.println(phi);
 
-    SerialBT.println(uRobot);
+    SerialBT.print(uRobot);
+    SerialBT.print("  ");
     SerialBT.println(wRobot);
     //SerialBT.println(phi);
     

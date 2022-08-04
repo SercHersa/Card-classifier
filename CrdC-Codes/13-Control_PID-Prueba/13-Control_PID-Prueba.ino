@@ -67,6 +67,15 @@ double dato[datoLength];
 motorControl motorL(sampleTime);
 motorControl motorR(sampleTime);
 
+//-------variables para el control
+
+float phid = 0.0;
+
+float ePhi = 0;
+float ex = 0;
+float ey = 0;
+
+float kp = 2;
 
 //--------------setup------------
 void setup() {
@@ -124,19 +133,10 @@ void loop() {
     stringComplete = false; 
   }*/
 
+  //velocityMotor(10,0);
+  posControl(2,0);
+  printValues();
   
-  if (dist > -0.5){
-    velocityMotor(-0.2,0);
-  }
-  else {
-    velocityMotor(0,0);
-    //dist = 0;
-   // phi = 0;
-  }
-  
-  
-  velValue();
-  serialEventBT();
 }
 
 
@@ -258,14 +258,17 @@ void anticlockwiseR(int vel){
 void velocityMotor(double u, double w){
   wLRef = (u - (L*w/2))/radio;
   wRRef = (u + (L*w/2))/radio;
+  velValue();
 }
 
 void velocityRobot(double wL, double wR){
   uRobot = (radio *(wR + wL)) / 2;     //Promedio de las velocidades angulares por el radio de la llanta
   wRobot = (radio *(wR - wL)) / L;     //Diferencia entre las velocidades angulares por el radio de la llanta entre la distancia entre ellas
+  
   phi = phi + 0.1 * wRobot;            //Angulo en radianes
   phi = atan2(sin(phi),cos(phi));
-
+  //thetha = phi/PI *180;
+  
   dist = 0.1 * uRobot;
   //dist = dist + 0.1 * uRobot;
 
@@ -273,21 +276,58 @@ void velocityRobot(double wL, double wR){
   y = y + dist * sin(phi);
 }
 
+void posControl(float xdes, float ydes){
+  //speeds();
+  //V = (VL + VR)/2;
+  //V = 3000;
+  int U = 1;
+  ex = xdes - x;
+  ey = ydes - y;
+  phid = atan2(ey,ex);
+  ePhi = phid-phi;
+  
+  int W = wRobot + kp *ePhi;
+  
+  
+
+  if (abs(ex) < 0.5 && abs(ey) < 0.5){
+    velocityMotor(0,0);
+  }
+  else {
+    velocityMotor(U,W);
+  }
+  
+  
+}
+
 
 void printValues(){
   //Serial.println(uRobot);
     //Serial.println(wRobot);
-    Serial.print(dist);
-    Serial.print("  ");
-    Serial.println(phi);
+  Serial.print("ex: ");
+  Serial.print(ex);
 
-    //SerialBT.println(uRobot);
-    //SerialBT.println(wRobot);
-    //SerialBT.println(phi);
+  Serial.print("  x: ");
+  Serial.print(x);
+
+  Serial.print("  ey: ");
+  Serial.print(ey);
+  
+  Serial.print("  y: ");
+  Serial.print(y);
+  
+  Serial.print("  uRobot: ");
+  Serial.print(uRobot);
+  
+  Serial.print("  wRobot: ");
+  Serial.print(wRobot);
+
+  Serial.print("  phi: ");
+  Serial.println(phi);
 }
 
 void rute(){
-  if (startf){
+  //if (startf){
     
-  }
+  
 }
