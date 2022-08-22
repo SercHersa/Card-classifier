@@ -29,7 +29,7 @@ bool rA = false;
 //---------------------------setup------------------------------
 void setup() {
   servoGrip.attach(15);                        // Asocia el  pin 7 al servo y lleva a 170 grados
-  servoGrip.write(180);                     //Abrir gripper 
+  servoGrip.write(0);                     //Abrir gripper 
 
   for(int i = 0; i < 4; i++){
     pinMode(codigo[i], OUTPUT);
@@ -149,7 +149,7 @@ boolean comparaUID(byte lectura[],byte tarjeta[]) // funcion comparaUID
 }
 
 void tomarTarjeta() {
-  servoGrip.write(135);         //Cerrar gripper
+  servoGrip.write(90);         //Cerrar gripper
 }
 
 void coding(int code){
@@ -251,6 +251,6 @@ void coding(int code){
     for(int i = 0; i < 4; i++){
       digitalWrite(codigo[i],HIGH);
     }
-    servoGrip.write(180);               //Abrir gripper y soltar tarjeta
+    servoGrip.write(0);               //Abrir gripper y soltar tarjeta
   }
 }
