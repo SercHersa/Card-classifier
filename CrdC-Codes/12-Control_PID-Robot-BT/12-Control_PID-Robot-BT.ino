@@ -23,7 +23,7 @@ BluetoothSerial SerialBT;
 #define MRenc_B 23 // Blanco
 
 // Configurando los parámetros de PWM
-const int frecuencia = 10000;
+const int frecuencia = 15000;
 const int canal_L = 0;
 const int canal_R = 1;
 const int resolucion = 12;

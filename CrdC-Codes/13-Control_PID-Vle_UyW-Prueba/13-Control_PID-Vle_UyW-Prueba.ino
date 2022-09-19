@@ -107,19 +107,11 @@ void setup() {
 
 //--------------loop------------
 void loop() {
-  if (stringComplete) {
-    for (int i = 0; i < datoLength; i++){
-      int index = inputString.indexOf(separator);
-      dato[i] = inputString.substring(0,index).toFloat();
-      inputString = inputString.substring(index + 1);
-    }
+  velocityMotor(0.3,0);
+//  if (millis() - 3000){
+//    velocityMotor(0,0);     // Velocidad lineal del robot y angular
+//  }
 
-    velocityMotor(dato[0],dato[1]);     // Velocidad lineal del robot y angular
-    
-    inputString = ""; 
-    stringComplete = false; 
-  }
-  
   velValue();
   serialEventBT();
 }
@@ -170,7 +162,8 @@ void velValue(){
 
     velocityRobot(wL,wR);
     
-    Serial.println(uRobot);
+    Serial.print(uRobot);
+    Serial.print("  ");
     Serial.println(wRobot);
     //Serial.println(phi);
 
