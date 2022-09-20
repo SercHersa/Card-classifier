@@ -4,8 +4,9 @@
 #define RST_PIN  22      // Pin de reset
 #define SS_PIN  21      // Pin de slave select
 #define robotAlert 2    // Pin donde el robot le dirá a Arduino que ya se alineo con la caja
-#define pin_servo 13    // Pin donde le dirá al robot si abrir o cerrar servo
-#define pin_par 15      // Pin donde le dirá por cual ruta deberá irse 
+#define pin_servo 15    // Pin donde le dirá al robot si abrir o cerrar servo
+#define pin_par 13      // Pin donde le dirá por cual ruta deberá irse 
+#define pin_impar 12      // Pin donde le dirá por cual ruta deberá irse 
 
 MFRC522 rfid(SS_PIN, RST_PIN);               // Objeto mfrc522 enviando pines de slave select y reset
 
@@ -17,17 +18,19 @@ byte dato, n;
 byte alto = 0;
 
 
-//---------------------------setup------------------------------
+//---------------------------setup------------------------------ 
 void setup() {
   pinMode(robotAlert, INPUT);
   pinMode(pin_servo, OUTPUT);
   pinMode(pin_par, OUTPUT);
+  pinMode(pin_impar, OUTPUT);
 
   digitalWrite(pin_servo,LOW);
   digitalWrite(pin_par,LOW);
+  digitalWrite(pin_impar,LOW);
   
   for(int i = 0; i < 4; i++){
-    pinMode(codigo[i], OUTPUT);
+    pinMode(codigo[i], OUTPUT);  
     digitalWrite(codigo[i],LOW);
   }
   
@@ -147,6 +150,7 @@ void codificador(int code){
     }
     
     digitalWrite(pin_par, HIGH);
+    digitalWrite(pin_impar, LOW);
     Serial.println("Ruta par");
   }
   
@@ -157,6 +161,7 @@ void codificador(int code){
     digitalWrite(codigo[0],HIGH);
 
     digitalWrite(pin_par, LOW);
+    digitalWrite(pin_impar, HIGH);
     Serial.println("Ruta impar");
   }
 
@@ -167,6 +172,7 @@ void codificador(int code){
     digitalWrite(codigo[1],HIGH);
     
     digitalWrite(pin_par, HIGH);
+    digitalWrite(pin_impar, LOW);
     Serial.println("Ruta par");
   }
   
@@ -178,6 +184,7 @@ void codificador(int code){
     digitalWrite(codigo[1],HIGH);
 
     digitalWrite(pin_par, LOW);
+    digitalWrite(pin_impar, HIGH);
     Serial.println("Ruta impar");
   }
 
@@ -187,7 +194,8 @@ void codificador(int code){
     }
     digitalWrite(codigo[2],HIGH);
     
-    digitalWrite(pin_par, HIGH);
+    digitalWrite(pin_par, LOW);
+    digitalWrite(pin_impar, HIGH);
     Serial.println("Ruta par");
   }
   
@@ -199,6 +207,7 @@ void codificador(int code){
     digitalWrite(codigo[2],HIGH);
 
     digitalWrite(pin_par, LOW);
+    digitalWrite(pin_impar, HIGH);
     Serial.println("Ruta impar");
   }
 
@@ -210,6 +219,7 @@ void codificador(int code){
     digitalWrite(codigo[2],HIGH);
     
     digitalWrite(pin_par, HIGH);
+    digitalWrite(pin_impar, LOW);
     Serial.println("Ruta par");
   }
 
@@ -222,6 +232,7 @@ void codificador(int code){
     digitalWrite(codigo[2],HIGH);
     
     digitalWrite(pin_par, LOW);
+    digitalWrite(pin_impar, HIGH);
     Serial.println("Ruta impar");
   }
 
@@ -232,6 +243,7 @@ void codificador(int code){
     digitalWrite(codigo[3],HIGH);
 
     digitalWrite(pin_par, HIGH);
+    digitalWrite(pin_impar, LOW);
     Serial.println("Ruta par");
   }
 
@@ -243,6 +255,7 @@ void codificador(int code){
     digitalWrite(codigo[3],HIGH);
 
     digitalWrite(pin_par, LOW);
+    digitalWrite(pin_impar, HIGH);
     Serial.println("Ruta impar");
   }
 
@@ -254,6 +267,7 @@ void codificador(int code){
     digitalWrite(codigo[3],HIGH);
 
     digitalWrite(pin_par, HIGH);
+    digitalWrite(pin_impar, LOW);
     Serial.println("Ruta par");
   }
 
@@ -266,6 +280,7 @@ void codificador(int code){
     digitalWrite(codigo[3],HIGH);
 
     digitalWrite(pin_par, LOW);
+    digitalWrite(pin_impar, HIGH);
     Serial.println("Ruta impar");
   }
 
@@ -277,6 +292,7 @@ void codificador(int code){
     digitalWrite(codigo[3],HIGH);
 
     digitalWrite(pin_par, HIGH);
+    digitalWrite(pin_impar, LOW);
     Serial.println("Ruta par");
   }
 
@@ -289,6 +305,7 @@ void codificador(int code){
     digitalWrite(codigo[3],HIGH);
 
     digitalWrite(pin_par, LOW);
+    digitalWrite(pin_impar, HIGH);
     Serial.println("Ruta impar");
   }
 
@@ -301,6 +318,7 @@ void codificador(int code){
     digitalWrite(codigo[3],HIGH);
 
     digitalWrite(pin_par, HIGH);
+    digitalWrite(pin_impar, LOW);
     Serial.println("Ruta par");
   }
 
@@ -310,6 +328,7 @@ void codificador(int code){
     }
 
     digitalWrite(pin_par, LOW);
+    digitalWrite(pin_impar, HIGH);
     Serial.println("Ruta impar");
   }
 
